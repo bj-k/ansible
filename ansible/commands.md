@@ -1,3 +1,9 @@
+
+Ad-hoc commands:
+----------------
+http://docs.ansible.com/ansible/latest/intro_adhoc.html
+
+
 ansible <pattern_goes_here> -m <module_name> -a <arguments>
 
 pattern:
@@ -17,8 +23,40 @@ pattern:
   => all machines in webservers and dbservers group if in group staging but not in group backup-site
 
 
-Config -> first one will be taken, no merging:
+Playbook commands:
+------------------
+ansible-playbook test.yml-ö
+
+
+Config:
+-------
+-> first one will be taken, no merging:
 * ANSIBLE_CONFIG (an environment variable)
 * ansible.cfg (in the current directory)
 * .ansible.cfg (in the home directory)
 * /etc/ansible/ansible.cfg
+
+  Comments:
+  # some basic default values...
+  inventory = /etc/ansible/hosts  ; This points to the file that lists your hosts
+
+
+Role structure:
+---------------
+roles/
+   common/
+     files/
+     templates/
+     tasks/
+     handlers/
+     vars/
+     defaults/
+     meta/
+   webservers/
+     files/
+     templates/
+     tasks/
+     handlers/
+     vars/
+     defaults/
+     meta/

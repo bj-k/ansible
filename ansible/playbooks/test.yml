@@ -1,0 +1,10 @@
+---
+- hosts: nodes
+  user: ubuntu
+  become: yes
+
+  tasks:
+  - name: ensure python is installed
+    apt: name=python state=installed
+  - name: ensure python is installed
+    apt: name=cowsay state=installed    
