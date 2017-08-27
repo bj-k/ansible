@@ -1,0 +1,29 @@
+---
+# a list of fruits
+fruits:
+  - Apple
+  - Orange
+# Also:
+fruits2: ['Apple', 'Orange']
+# a dictionary
+person:
+  name: myName
+  job: myJob
+# Also:
+person2: {name: myName, job: myJob}
+
+#Booleans
+# yes, true, True, TRUE
+# no, false, False, FALSE
+
+include_newlines: |
+  exactly as you see
+  will appear these three
+  lines of poetry
+
+ignore_newline:
+  this is really a
+  single line of text
+  despite appearances
+
+...

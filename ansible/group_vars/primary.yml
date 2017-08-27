@@ -1,0 +1,3 @@
+# variables for primary group
+
+# group_vars/ and host_vars/ can exist in playbook directory OR inventory directory
