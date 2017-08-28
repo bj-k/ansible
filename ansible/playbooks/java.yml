@@ -1,0 +1,20 @@
+---
+- hosts: opensuse
+  user: vagrant
+  become: yes
+
+  tasks:
+  - name: ensure python is installed
+    zypper: name=python state=installed
+  - name: createuser
+    user:
+      name: tci-build
+      # openssl passwd -salt mysalt -1 build-tci
+      password: $1$mysalt$JuRQlGuKabFqsvEboDnsp/
+  - name: install zypper repo
+    zypper_repository:
+        repo: /vagrant/stage
+        name: stage-repo
+  - name: install java
+    zypper:
+      name: /vagrant/stage/jre-8u144-linux-x64.rpm

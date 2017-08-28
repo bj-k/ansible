@@ -20,6 +20,12 @@ Vagrant.configure("2") do |config|
 	master.vm.hostname ="master"
   end
   
+  config.vm.define "opensuse" do |opensuse|
+	opensuse.vm.network "private_network", ip: "192.168.33.20"
+	opensuse.vm.box = "opensuse/openSUSE-42.3-x86_64"
+	opensuse.vm.hostname ="opensuse"
+  end
+  
   (1..3).each do |i|
 	config.vm.define "node-#{i}" do |node|
 		node.vm.hostname ="node-#{i}"
