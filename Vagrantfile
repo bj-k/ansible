@@ -14,26 +14,50 @@ Vagrant.configure("2") do |config|
   # boxes at https://atlas.hashicorp.com/search.
   config.vm.box = "ubuntu/xenial64"
   #config.vm.box = "generic/opensuse42"
-  config.vm.define "master", primary: true do |master|
-	master.vm.network "private_network", ip: "192.168.33.10"
-	master.vm.box = "ubuntu/xenial64"
-	master.vm.hostname ="master"
-  end
-  
+
+  # VirtualBox Guest plugIn
+  # https://github.com/dotless-de/vagrant-vbguest
+  config.vbguest.auto_update = false
+  # config.vm.synced_folder ".", "/vagrant", type: "virtualbox"
+
   config.vm.define "opensuse" do |opensuse|
-	opensuse.vm.network "private_network", ip: "192.168.33.20"
-	opensuse.vm.box = "opensuse/openSUSE-42.3-x86_64"
-	opensuse.vm.hostname ="opensuse"
+  	opensuse.vm.network "private_network", ip: "192.168.33.20"
+  	opensuse.vm.box = "opensuse/openSUSE-42.3-x86_64"
+  	opensuse.vm.hostname ="opensuse"
   end
-  
-  (1..3).each do |i|
-	config.vm.define "node-#{i}" do |node|
-		node.vm.hostname ="node-#{i}"
-		node.vm.network "private_network", ip: "192.168.33.1#{i}"
-		node.vm.provision "shell", inline: "echo hello from node #{i}"
-	end
+
+  config.vm.define "debian" do |debian|
+  	debian.vm.network "private_network", ip: "192.168.33.21"
+  	debian.vm.box = "debian/jessie64"
+  	debian.vm.hostname ="debian"
   end
-  
+
+  config.vm.define "ubuntu" do |ubuntu|
+  	ubuntu.vm.network "private_network", ip: "192.168.33.22"
+  	ubuntu.vm.box = "ubuntu/xenial64"
+  	ubuntu.vm.hostname ="ubuntu"
+  end
+
+
+  config.vm.define "centos" do |centos|
+  	centos.vm.network "private_network", ip: "192.168.33.23"
+  	centos.vm.box = "centos/7"
+  	centos.vm.hostname ="centos"
+  end
+
+  # config.vm.define "master", primary: true do |master|
+  # 	master.vm.network "private_network", ip: "192.168.33.10"
+  # 	master.vm.box = "ubuntu/xenial64"
+  # 	master.vm.hostname ="master"
+  # end
+  # (1..3).each do |i|
+  # 	config.vm.define "node-#{i}" do |node|
+  # 		node.vm.hostname ="node-#{i}"
+  # 		node.vm.network "private_network", ip: "192.168.33.1#{i}"
+  # 		node.vm.provision "shell", inline: "echo hello from node #{i}"
+  # 	end
+  # end
+
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -47,7 +71,7 @@ Vagrant.configure("2") do |config|
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
-  
+
 
   # Create a public network, which generally matched to bridged network.
   # Bridged networks make the machine appear as another physical device on
@@ -85,11 +109,11 @@ Vagrant.configure("2") do |config|
   # Enable provisioning with a shell script. Additional provisioners such as
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
-  $script = <<-SCRIPT
-      echo -e 'ubuntu\nubuntu' | sudo passwd ubuntu
-  SCRIPT
-  
-  config.vm.provision "shell", inline: $script
-  
+  #$script = <<-SCRIPT
+  #    echo -e 'ubuntu\nubuntu' | sudo passwd ubuntu
+  #SCRIPT
+
+  # config.vm.provision "shell", inline: $script
+
 
 end
