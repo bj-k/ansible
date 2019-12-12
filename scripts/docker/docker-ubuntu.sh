@@ -6,7 +6,7 @@
 
 
 # remove old versions
-sudo apt-get remove docker docker-engine docker.io
+sudo apt-get remove docker docker-engine docker.io containerd runc
 
 sudo apt-get update
 
@@ -14,6 +14,7 @@ sudo apt-get install \
     apt-transport-https \
     ca-certificates \
     curl \
+    gnupg-agent \
     software-properties-common
 
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
@@ -24,10 +25,13 @@ sudo add-apt-repository \
    stable"
 
 # Install docker-ce
-sudo apt-get update
-sudo apt-get install docker-ce
+sudo apt-get update && sudo apt-get install docker-ce
 
-sudo usermod -aG docker ubuntu
+# Install specific version
+# apt-cache madison docker-ce
+# sudo apt-get install docker-ce=18.06.0~ce~3-0~ubuntu
+
+sudo usermod -aG docker vagrant
 
 # Test
 sudo docker run hello-world

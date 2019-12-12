@@ -1,2 +1,2 @@
-*.yml -text
+*.sh -text eol=lf
 *.yml -text
